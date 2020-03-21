@@ -1,6 +1,8 @@
 const Client = require('museria').Client;
 const utils = require('museria/src/utils');
 
+// Тестрирование работы функций museria
+
 (async () => {  
   try {
     const client = new Client({

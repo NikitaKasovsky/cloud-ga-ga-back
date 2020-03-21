@@ -30,6 +30,7 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "museria": "^0.1.11",
+    "nodemon": "^2.0.2",
     "optimist": "^0.6.1",
     "spreadable": "^0.1.5"
   },
