@@ -1,9 +1,12 @@
 const Client = require('museria').Client;
 const utils = require('museria/src/utils');
 const express = require('express');
+const cors = require('cors');
+
 const app = express();
 
-app.listen(3000)
+app.use(cors())
+app.listen(3000);
 
 const client = new Client({address: 'localhost:2079'});
 client.init().then(() => console.log('client init'));

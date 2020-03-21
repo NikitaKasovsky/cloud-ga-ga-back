@@ -28,6 +28,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "museria": "^0.1.11",
     "nodemon": "^2.0.2",
