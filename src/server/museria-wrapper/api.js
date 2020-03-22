@@ -1,40 +1,38 @@
 const Client = require('museria').Client;
 const utils = require('museria/src/utils');
 const express = require('express');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
 
-app.use(cors())
 app.listen(3000);
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 const client = new Client({address: 'localhost:2079'});
 client.init().then(() => console.log('client init'));
 
-// Добавление тега трека
-app.get('/song/add-tag', async (req, res, next) => {
-  console.log(req)
-  const song = await utils.addSongTags('./test-files/Jack Stauber - Buttercup.mp3', {
+// Добавление трека (c тегом)
+app.post('/song/add', async (req, res) => {
+  console.log(req.body);
+  const url = './test-files/Jack Stauber - Buttercup.mp3';
+  await utils.addSongTags(url, {
     fullTitle: 'Artist - Title',
-    APIC: './cover.jpg'
+    APIC: './est-files/cover.png'
   });
-  res.send(song);
-})
-
-// Добавление трека
-app.get('/song/add', async (req) => {
-  const url = '';
   const addedSong = await client.addSong(url);
-  res.send(addSong);
+  res.sendStatus(200)
 })
 
 // Получение трека
-app.get('/song/get-song', async (req, res) => {
-  const infoSong = await client.getSong('Artist - Title');
+app.post('/song/get', async (req, res) => {
+  const infoSong = await client.getSong(req.body.name);
   res.send(infoSong);
 })
 
 // Удаление трека
-app.get('./song/remove', async () => {
+app.delete('./song/remove', async () => {
   await client.removeSong('title')
 })
